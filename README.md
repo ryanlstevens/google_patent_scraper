@@ -6,7 +6,7 @@ A python package to scrape patents from 'https://patents.google.com/'. The packa
 There are two primary ways to use this package:
 1. Scrape a single patent
 
-``` javascript
+``` python
 # ~ Import packages ~ #
 from patent_scraper import google_scraper
 import json
@@ -28,7 +28,7 @@ patent_2_parsed = scraper.process_patent_html(soup_2)
 
 2. Scrape a list of patents
 
-```javascript
+```python
 # ~ Import packages ~ #
 from patent_scraper import google_scraper
 import json
