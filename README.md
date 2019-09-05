@@ -1,6 +1,13 @@
 # Patent Scraper
 A python package to scrape patents from 'https://patents.google.com/'. The package is made up of a single python class, scraper_class. This scraper can be used both to retreive parsed html of a single patents page or a list of patents.
 
+## Package Installation
+The package is available on PyPi, and can be installed using pip:
+
+```python
+pip install google_patent_scraper
+```
+
 ## Main Use Cases
 
 There are two primary ways to use this package:
