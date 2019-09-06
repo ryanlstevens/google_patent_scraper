@@ -40,7 +40,7 @@ list_of_patents = ['CH2881A', 'CH2000A', 'AU403812A',
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # ~~~ Parameters for data file ~~~ #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-path_to_data = 'C:/Users/ryanl/Dropbox/patent_scraper/example/data/'
+path_to_data = 'path_to_data'
 
 
 ## Create csv file to store the data from the patent runs 
