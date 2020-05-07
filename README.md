@@ -15,6 +15,7 @@ The main elements returned by the scraper class are:
     forward_cites_yes_family  (json)  : forward citations that are family-to-family cites
     backward_cites_no_family  (json)  : backward citations that are not family-to-family cites
     backward_cites_yes_family (json)  : backward citations that are family-to-family cites
+    abstract_text             (str)   : text of abstract (if exists)
 
 ## Package Installation
 The package is available on PyPi, and can be installed using pip:
@@ -70,6 +71,26 @@ patent_2_parsed = scraper.parsed_patents['US266827A']
 # ~ Print inventors of patent US2668287A ~ #
 for inventor in json.loads(patent_1_parsed['inventor_name']):
   print('Patent inventor : {0}'.format(inventor['inventor_name']))
+```
+
+3. Scrape a patent and retrieve abstract information
+
+``` python
+# ~ Import packages ~ #
+from google_patent_scraper import scraper_class
+
+# ~ Initialize scraper class ~ #
+scraper=scraper_class(return_abstract=True)  #<- TURN ON ABSTRACT TEXT  
+
+# ~~ Scrape patents individually ~~ #
+patent_1 = 'US7742806'
+err_1, soup_1, url_1 = scraper.request_single_patent(patent_1)
+
+# ~ Parse results of scrape ~ #
+patent_1_parsed = scraper.get_scraped_data(soup_1,patent_1,url_1)
+
+# ~ Print abstract text ~ #
+print(patent_1_parsed['abstract_text'])
 ```
 
 
