@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="google_patent_scraper",
-    version="1.0.5",
+    version="1.0.8",
     author="Ryan Stevens",
     author_email="ryan.louis.stevens@gmail.com",
     description="A package to scrape patents from 'https://patents.google.com/'",

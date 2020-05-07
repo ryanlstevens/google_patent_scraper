@@ -52,12 +52,14 @@ class scraper_class:
         - list_of_patents (list) : patents to be scraped
         - scrape_status   (dict) : status of request using patent
         - parsed_patents  (dict) : result of parsing patent html
+        - return_abstract (bool) : boolean for whether the code should return the abstract  
 
     """
-    def __init__(self):
+    def __init__(self,return_abstract=False):
         self.list_of_patents = []
         self.scrape_status = {}
         self.parsed_patents = {}
+        self.return_abstract = return_abstract
 
     def add_patents(self, patent):
         """Append patent to patent list attribute self.list_of_patents
@@ -67,12 +69,25 @@ class scraper_class:
             - patent (str) : patent number 
 
         """
-        # ~ Check if patent is list ~ #
+        # ~ Check if patent is string ~ #
         if not isinstance(patent,str):
             raise(PatentClassError("'patent' variable must be a string"))
         # ~ Append patent to list to be scrapped ~ #
         else:
             self.list_of_patents.append(patent)
+
+    def delete_patents(self,patent):
+        """Remove patent from patent list attribute self.list_of_patents
+
+        Inputs:
+            - patent (str) : patent number
+        """
+        # ~ Check if patent is in list ~ #
+        if patent in self.list_of_patents:
+            self.list_of_patents.pop(self.list_of_patents.index(patent))
+        else:
+            print('Patent {0} not in patent list'.format(patent))            
+
 
     def add_scrape_status(self,patent,success_value):
         """Add status of scrape to dictionary self.scrape_status"""
@@ -98,6 +113,7 @@ class scraper_class:
                 url='https://patents.google.com/patent/{0}'.format(patent)
             else:
                 url=patent
+            print(url)
             req = Request(url,headers={'User-Agent': 'Mozilla/5.0'})
             webpage = urlopen(req).read()
             soup = BeautifulSoup(webpage, features="lxml")
@@ -244,6 +260,17 @@ class scraper_class:
                 backward_cites_yes_family.append(self.parse_citation(citation))
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        #  Get abstract 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        abstract_text=''
+        if self.return_abstract:
+            # Get abstract # 
+            abstract = soup.find('meta',attrs={'name':'DC.description'})
+            # Get text 
+            if abstract:
+                abstract_text=abstract['content']
+
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         return({'inventor_name':json.dumps(inventor_name),
@@ -256,7 +283,8 @@ class scraper_class:
                 'forward_cite_no_family':json.dumps(forward_cites_no_family),
                 'forward_cite_yes_family':json.dumps(forward_cites_yes_family),
                 'backward_cite_no_family':json.dumps(backward_cites_no_family),
-                'backward_cite_yes_family':json.dumps(backward_cites_yes_family)})
+                'backward_cite_yes_family':json.dumps(backward_cites_yes_family),
+                'abstract_text':abstract_text})
 
     def get_scraped_data(self,soup,patent,url):
         # ~~ Parse individual patent ~~ #
