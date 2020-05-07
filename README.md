@@ -80,7 +80,7 @@ for inventor in json.loads(patent_1_parsed['inventor_name']):
 from google_patent_scraper import scraper_class
 
 # ~ Initialize scraper class ~ #
-scraper=scraper_class(return_abstract=TRUE)  #<- TURN ON ABSTRACT TEXT  
+scraper=scraper_class(return_abstract=True)  #<- TURN ON ABSTRACT TEXT  
 
 # ~~ Scrape patents individually ~~ #
 patent_1 = 'US7742806'
