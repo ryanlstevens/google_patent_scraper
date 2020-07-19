@@ -1,7 +1,7 @@
 # Patent Scraper
 A python package to scrape patents from 'https://patents.google.com/'. The package is made up of a single python class, scraper_class. This scraper can be used both to retreive parsed html of a single patents page or a list of patents.
 
-The main elements returned by the scraper class are:
+The following elements are always returned by the scraper class:
 
     application_number        (str)   : application number
     inventor_name             (json)  : inventors of patent 
@@ -15,7 +15,9 @@ The main elements returned by the scraper class are:
     forward_cites_yes_family  (json)  : forward citations that are family-to-family cites
     backward_cites_no_family  (json)  : backward citations that are not family-to-family cites
     backward_cites_yes_family (json)  : backward citations that are family-to-family cites
-    abstract_text             (str)   : text of abstract (if exists)
+    
+ There are optional elements you can have returned, see examples below:
+    abstract_text             (str)   : text of abstract (if exists)       
 
 ## Package Installation
 The package is available on PyPi, and can be installed using pip:
@@ -73,7 +75,11 @@ for inventor in json.loads(patent_1_parsed['inventor_name']):
   print('Patent inventor : {0}'.format(inventor['inventor_name']))
 ```
 
-3. Scrape a patent and retrieve abstract information
+### Additional optional information
+
+__Return Abstract Information__
+
+Scrape a patent and retrieve abstract information
 
 ``` python
 # ~ Import packages ~ #
