@@ -17,6 +17,7 @@ The following elements are always returned by the scraper class:
     backward_cites_yes_family (json)  : backward citations that are family-to-family cites
     
  There are optional elements you can have returned, see examples below:
+ 
     abstract_text             (str)   : text of abstract (if exists)       
 
 ## Package Installation
