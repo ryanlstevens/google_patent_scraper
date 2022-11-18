@@ -47,7 +47,7 @@ err_2, soup_2, url_2 = scraper.request_single_patent(patent_2)
 
 # ~ Parse results of scrape ~ #
 patent_1_parsed = scraper.get_scraped_data(soup_1,patent_1,url_1)
-patent_2_parsed = scraper.get_scraped_data(soup_2,patetn_2,url_2)
+patent_2_parsed = scraper.get_scraped_data(soup_2,patent_2,url_2)
 ```
 
 2. Scrape a list of patents
