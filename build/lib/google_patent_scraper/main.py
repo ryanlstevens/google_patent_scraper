@@ -159,6 +159,7 @@ class scraper_class:
 
 
         Returns (variables returned in dictionary, following are key names): 
+            - title                     (str)   : title
             - application_number        (str)   : application number
             - inventor_name             (json)  : inventors of patent 
             - assignee_name_orig        (json)  : original assignees to patent
@@ -177,6 +178,14 @@ class scraper_class:
             
 
         """
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        #  Get title 
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        title_text=''
+        # Get title # 
+        title = soup.find('meta',attrs={'name':'DC.title'})
+        title_text=title['content'].rstrip()
+
         try:
             inventor_name = [{'inventor_name':x.get_text()} for x in soup.find_all('dd',itemprop='inventor')]
         except:
@@ -273,7 +282,8 @@ class scraper_class:
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-        return({'inventor_name':json.dumps(inventor_name),
+        return({'title': title_text,
+                'inventor_name':json.dumps(inventor_name),
                 'assignee_name_orig':json.dumps(assignee_name_orig),
                 'assignee_name_current':json.dumps(assignee_name_current),
                 'pub_date':pub_date,
