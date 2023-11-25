@@ -3,6 +3,7 @@ A python package to scrape patents from 'https://patents.google.com/'. The packa
 
 The following elements are always returned by the scraper class:
 
+    title                     (str)   : title
     application_number        (str)   : application number
     inventor_name             (json)  : inventors of patent 
     assignee_name_orig        (json)  : original assignees to patent
