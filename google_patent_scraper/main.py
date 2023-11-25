@@ -219,6 +219,7 @@ class scraper_class:
         list_of_application_events = soup.find_all('dd',itemprop='events')
         priority_date = ''
         grant_date = ''
+        expiration_date = ''
         for app_event in list_of_application_events:
             # Get information #
             try:
@@ -230,6 +231,9 @@ class scraper_class:
                     grant_date = timeevent
                 if title_info == 'publication' and pub_date=='':
                     pub_date = timeevent
+                if 'expiration' in app_event.find('span',itemprop='title').get_text().lower():
+                    expiration_date = timeevent
+
             except:
                 continue 
 
@@ -290,6 +294,7 @@ class scraper_class:
                 'priority_date':priority_date,
                 'grant_date':grant_date,
                 'filing_date':filing_date,
+                'expiration_date': expiration_date,
                 'forward_cite_no_family':json.dumps(forward_cites_no_family),
                 'forward_cite_yes_family':json.dumps(forward_cites_yes_family),
                 'backward_cite_no_family':json.dumps(backward_cites_no_family),
