@@ -168,6 +168,7 @@ class scraper_class:
             - filing_date               (str)   : filing date
             - priority_date             (str)   : priority date
             - grant_date                (str)   : grant date
+            - expiration_date           (str)   : expiration date
             - forward_cites_no_family   (json)  : forward citations that are not family-to-family cites
             - forward_cites_yes_family  (json)  : forward citations that are family-to-family cites
             - backward_cites_no_family  (json)  : backward citations that are not family-to-family cites
